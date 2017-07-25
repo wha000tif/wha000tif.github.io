@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="waht000if">
 <meta property="og:description" content="Python正则表达式学习  正则表达式前前后后看过几次，但是因为之前没怎么用到，所以经常性遗忘。这里做个笔记记录下。  首先，在Python中正则表达式大概分为一下几个部分:    元字符 模式 函数 re内置对象使用方法 分组用法 环视用法  一、 元字符匹配字符.               匹配任意的字符，但是不包括换行符 \d              匹配数字 \s">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-25T06:08:21.821Z">
+<meta property="og:updated_time" content="2017-07-25T06:12:58.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python正则表达式学习笔记">
 <meta name="twitter:description" content="Python正则表达式学习  正则表达式前前后后看过几次，但是因为之前没怎么用到，所以经常性遗忘。这里做个笔记记录下。  首先，在Python中正则表达式大概分为一下几个部分:    元字符 模式 函数 re内置对象使用方法 分组用法 环视用法  一、 元字符匹配字符.               匹配任意的字符，但是不包括换行符 \d              匹配数字 \s">
@@ -99,7 +99,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python正则表达式学习"><span class="toc-number">1.</span> <span class="toc-text">Python正则表达式学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-元字符"><span class="toc-number">1.0.1.</span> <span class="toc-text">一、 元字符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#匹配字符"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">匹配字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表示重复"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">表示重复</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#匹配位置"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">匹配位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符类"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">字符类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组"><span class="toc-number">1.0.1.5.</span> <span class="toc-text">分组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数"><span class="toc-number">1.0.1.6.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#match对象的方法"><span class="toc-number">1.0.1.7.</span> <span class="toc-text">match对象的方法</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python正则表达式学习"><span class="toc-number">1.</span> <span class="toc-text">Python正则表达式学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、-元字符"><span class="toc-number">1.1.</span> <span class="toc-text">一、 元字符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配字符"><span class="toc-number">1.1.1.</span> <span class="toc-text">匹配字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表示重复"><span class="toc-number">1.1.2.</span> <span class="toc-text">表示重复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配位置"><span class="toc-number">1.1.3.</span> <span class="toc-text">匹配位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符类"><span class="toc-number">1.1.4.</span> <span class="toc-text">字符类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分组"><span class="toc-number">1.2.</span> <span class="toc-text">分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">1.3.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#match对象的方法"><span class="toc-number">1.3.1.</span> <span class="toc-text">match对象的方法</span></a></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -147,27 +147,27 @@
 <li>分组用法</li>
 <li>环视用法</li>
 </ol>
-<h3 id="一、-元字符"><a href="#一、-元字符" class="headerlink" title="一、 元字符"></a>一、 元字符</h3><h4 id="匹配字符"><a href="#匹配字符" class="headerlink" title="匹配字符"></a>匹配字符</h4><pre><code>.               匹配任意的字符，但是不包括换行符
+<h2 id="一、-元字符"><a href="#一、-元字符" class="headerlink" title="一、 元字符"></a>一、 元字符</h2><h3 id="匹配字符"><a href="#匹配字符" class="headerlink" title="匹配字符"></a>匹配字符</h3><pre><code>.               匹配任意的字符，但是不包括换行符
 \d              匹配数字
 \s              匹配任意的空白字符相当于 [\t\n\r\f\v]
 \w              匹配字母数字下划线或者汉字
 \W              匹配任意非(字母，数字，下划线，汉字)的字符
 \S              匹配非任意空白字符相当于[^\t\n\r\f\v]
 \D              匹配任意非数字字符相当于[^0-9]
-</code></pre><h4 id="表示重复"><a href="#表示重复" class="headerlink" title="表示重复"></a>表示重复</h4><pre><code>*               重复0次或者更多次
+</code></pre><h3 id="表示重复"><a href="#表示重复" class="headerlink" title="表示重复"></a>表示重复</h3><pre><code>*               重复0次或者更多次
 +               重复一次或者多次
 ?               重复0次或者一次
 {n}             重复n次
 {n,}            重复n次或者更多次
 {n,m}           重复n-m次
-</code></pre><h4 id="匹配位置"><a href="#匹配位置" class="headerlink" title="匹配位置"></a>匹配位置</h4><pre><code>\\b             匹配单词的开始或者结束
+</code></pre><h3 id="匹配位置"><a href="#匹配位置" class="headerlink" title="匹配位置"></a>匹配位置</h3><pre><code>\\b             匹配单词的开始或者结束
 ^               匹配字符串的开始
 $               匹配字符串的结束
 \G              上一个匹配的结尾(本次匹配的开始)
 \A              字符串开头(类似^,但是不受处理多行选项的限制)
 \Z              字符串结尾或者行尾(不受处理多行选项的影响)
 \z              字符串结尾类似$，不受多行处理选项影响
-</code></pre><h4 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h4><pre><code>字符类
+</code></pre><h3 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h3><pre><code>字符类
 \0XX          8进制值XX所表示的字符
 \xXX          16进制值XX所表示的字符
 \uXXXX        16进制值XXXX所表示的unicode字符
@@ -191,7 +191,7 @@ $               匹配字符串的结束
 [a-zA-Z]      匹配所有字母等同于
 [0-9a-zA-Z_]  等同于\W
 [^aeiou]      匹配除了aeiou几个字符外的其他所有字符  
-</code></pre><h4 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h4><pre><code>(...)         分组，默认为捕获，即被分组的内容可以被单独取出，默认的每个分组都有一个索引，从1开始
+</code></pre><h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><pre><code>(...)         分组，默认为捕获，即被分组的内容可以被单独取出，默认的每个分组都有一个索引，从1开始
 (?:...)       分组不捕获模式，计算索引时会跳过这个分组
 (?P&lt;name&gt;...) 分组的命名模式，取出分组中的内容时可以使用索引也可以使用name
 (?P=name)     分组的引用模式，可以在同一个正则表达式中引用前面命名过得表达式
@@ -202,14 +202,14 @@ $               匹配字符串的结束
 (?&lt;!..)       逆序否定环视，表示所在位置的作侧内容应是不能匹配括号内正则
 \number       匹配和前面索引为number的分组捕获到的内容一样的字符串
 (?(id/name)yes|no)    若前面id/name指定的分组匹配成功，则执行yes处的匹配，否则执行no处的匹配
-</code></pre><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><pre><code>re.findall(pattern, string)       找到之后返回符合组的列表，组开头有?:则返回整个
+</code></pre><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><pre><code>re.findall(pattern, string)       找到之后返回符合组的列表，组开头有?:则返回整个
 re.search(pattern, string)        search 扫描整个字符串并返回第一个成功的匹配match对象。
 re.match(pattern, string)         re.match 尝试从字符串的起始位置匹配一个模式，如果不是起始位置匹配成功的话，match()就返回none。
 re.finditer(pattern, string)      找到re匹配的所有的子串，并把它们作为一个迭代器返回
 re.split(pattern, string)         分割字符串
 re.sub(pattern, repl, string, count=0)     替换count个，0为所有
 re.subn(pattern, repl, string)            功能同上，返回一个元组(替换完的字符串，替换次数)
-</code></pre><h4 id="match对象的方法"><a href="#match对象的方法" class="headerlink" title="match对象的方法"></a>match对象的方法</h4><pre><code>group()             返回匹配到的字符串
+</code></pre><h3 id="match对象的方法"><a href="#match对象的方法" class="headerlink" title="match对象的方法"></a>match对象的方法</h3><pre><code>group()             返回匹配到的字符串
 start()             返回匹配到的起始位置
 end()               返回匹配到的结束位置
 span()              返回一个元组(start，end)
@@ -240,7 +240,7 @@ group(num/name)     返回指定组匹配到的内容
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python正则表达式学习"><span class="toc-number">1.</span> <span class="toc-text">Python正则表达式学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-元字符"><span class="toc-number">1.0.1.</span> <span class="toc-text">一、 元字符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#匹配字符"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">匹配字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表示重复"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">表示重复</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#匹配位置"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">匹配位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符类"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">字符类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组"><span class="toc-number">1.0.1.5.</span> <span class="toc-text">分组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数"><span class="toc-number">1.0.1.6.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#match对象的方法"><span class="toc-number">1.0.1.7.</span> <span class="toc-text">match对象的方法</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python正则表达式学习"><span class="toc-number">1.</span> <span class="toc-text">Python正则表达式学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、-元字符"><span class="toc-number">1.1.</span> <span class="toc-text">一、 元字符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配字符"><span class="toc-number">1.1.1.</span> <span class="toc-text">匹配字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表示重复"><span class="toc-number">1.1.2.</span> <span class="toc-text">表示重复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配位置"><span class="toc-number">1.1.3.</span> <span class="toc-text">匹配位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符类"><span class="toc-number">1.1.4.</span> <span class="toc-text">字符类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分组"><span class="toc-number">1.2.</span> <span class="toc-text">分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">1.3.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#match对象的方法"><span class="toc-number">1.3.1.</span> <span class="toc-text">match对象的方法</span></a></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
