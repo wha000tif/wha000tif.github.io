@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="waht000if">
 <meta property="og:description" content="深度学习基本概念之二数据规范化  学习中数据所用的度量单位可能影响数据分析。例如，把height的度量单位从米变成英寸，把weight的度量单位从公斤改成磅，可能导致完全不同的结果。一般而言，用较小的单位表示属性将导致该属性具有较大值域，因此趋向于使这样的属性具有较大的影响或较高的“权重”。为了帮助避免对度量单位选择的依赖性，数据应该规范化或标准化。这涉及变换数据，使之落入较小的共同区间，如 [−">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-20T06:39:32.514Z">
+<meta property="og:updated_time" content="2017-07-20T07:54:07.608Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习概念之二">
 <meta name="twitter:description" content="深度学习基本概念之二数据规范化  学习中数据所用的度量单位可能影响数据分析。例如，把height的度量单位从米变成英寸，把weight的度量单位从公斤改成磅，可能导致完全不同的结果。一般而言，用较小的单位表示属性将导致该属性具有较大值域，因此趋向于使这样的属性具有较大的影响或较高的“权重”。为了帮助避免对度量单位选择的依赖性，数据应该规范化或标准化。这涉及变换数据，使之落入较小的共同区间，如 [−">
@@ -71,6 +71,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/2017/07/24/python正则表达式学习笔记/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
         
         <li><a class="icon" href="/2017/07/19/深度学习几个基本概念/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
         
@@ -99,7 +101,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#深度学习基本概念之二"><span class="toc-number">1.</span> <span class="toc-text">深度学习基本概念之二</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据规范化"><span class="toc-number">1.0.1.</span> <span class="toc-text">数据规范化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全连接网络"><span class="toc-number">1.0.2.</span> <span class="toc-text">全连接网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#梯度下降"><span class="toc-number">1.0.3.</span> <span class="toc-text">梯度下降</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交叉验证"><span class="toc-number">1.0.4.</span> <span class="toc-text">交叉验证</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#深度学习基本概念之二"><span class="toc-number">1.</span> <span class="toc-text">深度学习基本概念之二</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据规范化"><span class="toc-number">1.0.1.</span> <span class="toc-text">数据规范化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全连接网络"><span class="toc-number">1.0.2.</span> <span class="toc-text">全连接网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#梯度下降"><span class="toc-number">1.0.3.</span> <span class="toc-text">梯度下降</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交叉验证"><span class="toc-number">1.0.4.</span> <span class="toc-text">交叉验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#机器学习方法"><span class="toc-number">1.0.5.</span> <span class="toc-text">机器学习方法</span></a></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -142,6 +144,8 @@
 <h3 id="全连接网络"><a href="#全连接网络" class="headerlink" title="全连接网络"></a>全连接网络</h3><p>  对于n和n+1层而言，第n层的所有节点和第n+1层的所有节点都有连接，在第n+1层每个节点计算的时候，激活函数的输入都是第n层所有节点的加权。全连接是一种不错的训练模式，只是在网络很大的时候训练速度会很慢</p>
 <h3 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h3><p>  一种优化算法，该算法从任意点开始，沿该点梯度的反方向运动一段距离，在沿新位置梯度的反方向移动一段距离，如此迭代，解一直朝下坡最陡的方向运动，希望可以运动到函数全局最小的点。</p>
 <h3 id="交叉验证"><a href="#交叉验证" class="headerlink" title="交叉验证"></a>交叉验证</h3><p>  有时候也称为循环估计，是一种统计学上将数据样本切割成较小子集的使用方法。于是可以先在一个子集上分析训练，而使用其他的子集来做后续对此分析的确认及验证。开始的子集作为训练集，后面的子集称为验证集或者测试集。</p>
+<h3 id="机器学习方法"><a href="#机器学习方法" class="headerlink" title="机器学习方法"></a>机器学习方法</h3><p>  机器学习的方法大致可以分为三类，生成方法(gegerative approach)和判别方法(discrimination approach)以及两者结合的混合方法(hybrid)，所学到的模型也分为生成模型和判别模型(咋这么像回归和分类呢)以及混合模型。</p>
+<p>  生成方法通过观测数据学习样本与标签的联合概率分布P(X, Y)，训练好的模型能够生成符合样本分布的新数据，它可以用于有监督学习和无监督学习。在有监督学习任务中，根据贝叶斯公式由联合概率分布P(X,Y)求出条件概率分布P(Y|X)，从而得到预测的模型，典型的模型有朴素贝叶斯、混合高斯模型和隐马尔科夫模型等。无监督生成模型通过学习真实数据的本质特征，从而刻画出样本数据的分布特征，生成与训练样本相似的新数据。生成模型的参数远远小于训练数据的量，因此模型能够发现并有效内化数据的本质，从而可以生成这些数据。生成式模型在无监督深度学习方面占据主要位置，可以用于在没有目标类标签信息的情况下捕捉观测到或可见数据的高阶相关性。深度生成模型可以通过从网络中采样来有效生成样本，例如受限玻尔兹曼机（Restricted Boltzmann Machine, RBM）、深度信念网络（Deep Belief Network, DBN）、深度玻尔兹曼机（Deep Boltzmann Machine, DBM）和广义除噪自编码器（Generalized Denoising Autoencoders）。判别方法由数据直接学习决策函数f(X)或者条件概率分布P(Y|X)作为预测的模型，即判别模型。判别方法关心的是对给定的输入X，应该预测什么样的输出Y。典型的判别式模型包括k近邻法、决策树、支持向量机和提升方法等。</p>
 
   </div>
 </article>
@@ -168,7 +172,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#深度学习基本概念之二"><span class="toc-number">1.</span> <span class="toc-text">深度学习基本概念之二</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据规范化"><span class="toc-number">1.0.1.</span> <span class="toc-text">数据规范化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全连接网络"><span class="toc-number">1.0.2.</span> <span class="toc-text">全连接网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#梯度下降"><span class="toc-number">1.0.3.</span> <span class="toc-text">梯度下降</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交叉验证"><span class="toc-number">1.0.4.</span> <span class="toc-text">交叉验证</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#深度学习基本概念之二"><span class="toc-number">1.</span> <span class="toc-text">深度学习基本概念之二</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据规范化"><span class="toc-number">1.0.1.</span> <span class="toc-text">数据规范化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全连接网络"><span class="toc-number">1.0.2.</span> <span class="toc-text">全连接网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#梯度下降"><span class="toc-number">1.0.3.</span> <span class="toc-text">梯度下降</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交叉验证"><span class="toc-number">1.0.4.</span> <span class="toc-text">交叉验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#机器学习方法"><span class="toc-number">1.0.5.</span> <span class="toc-text">机器学习方法</span></a></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

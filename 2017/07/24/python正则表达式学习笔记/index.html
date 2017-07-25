@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Python正则表达式学习  正则表达式前前后后看过几次，但是因为之前没怎么用到，所以经常性遗忘。这里做个笔记记录下。  首先，在Python中正则表达式大概分为一下几个部分:    元字符 模式 函数 re内置对象使用方法 分组用法 环视用法  一、 元字符匹配字符.               匹配任意的字符，但是不包括换行符 \d              匹配数字 \s">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python正则表达式学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/07/24/python正则表达式学习笔记/index.html">
+<meta property="og:site_name" content="waht000if">
+<meta property="og:description" content="Python正则表达式学习  正则表达式前前后后看过几次，但是因为之前没怎么用到，所以经常性遗忘。这里做个笔记记录下。  首先，在Python中正则表达式大概分为一下几个部分:    元字符 模式 函数 re内置对象使用方法 分组用法 环视用法  一、 元字符匹配字符.               匹配任意的字符，但是不包括换行符 \d              匹配数字 \s">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-07-25T06:08:21.821Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python正则表达式学习笔记">
+<meta name="twitter:description" content="Python正则表达式学习  正则表达式前前后后看过几次，但是因为之前没怎么用到，所以经常性遗忘。这里做个笔记记录下。  首先，在Python中正则表达式大概分为一下几个部分:    元字符 模式 函数 re内置对象使用方法 分组用法 环视用法  一、 元字符匹配字符.               匹配任意的字符，但是不包括换行符 \d              匹配数字 \s">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Python正则表达式学习笔记</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="waht000if" type="application/atom+xml" />
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/index.html">Home</a></li>
+         
+          <li><a href="/about/index.html">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/wha000tif">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2017/07/20/深度学习概念之二/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/07/24/python正则表达式学习笔记/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&text=Python正则表达式学习笔记"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&title=Python正则表达式学习笔记"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&is_video=false&description=Python正则表达式学习笔记"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python正则表达式学习笔记&body=Check out this article: http://yoursite.com/2017/07/24/python正则表达式学习笔记/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&title=Python正则表达式学习笔记"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&title=Python正则表达式学习笔记"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&title=Python正则表达式学习笔记"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&title=Python正则表达式学习笔记"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&name=Python正则表达式学习笔记&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python正则表达式学习"><span class="toc-number">1.</span> <span class="toc-text">Python正则表达式学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-元字符"><span class="toc-number">1.0.1.</span> <span class="toc-text">一、 元字符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#匹配字符"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">匹配字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表示重复"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">表示重复</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#匹配位置"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">匹配位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符类"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">字符类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组"><span class="toc-number">1.0.1.5.</span> <span class="toc-text">分组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数"><span class="toc-number">1.0.1.6.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#match对象的方法"><span class="toc-number">1.0.1.7.</span> <span class="toc-text">match对象的方法</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Python正则表达式学习笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">waht000if</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-07-24T13:26:01.000Z" itemprop="datePublished">2017-07-24</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Python/">Python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Python正则表达式学习"><a href="#Python正则表达式学习" class="headerlink" title="Python正则表达式学习"></a>Python正则表达式学习</h1><p>  正则表达式前前后后看过几次，但是因为之前没怎么用到，所以经常性遗忘。这里做个笔记记录下。<br>  首先，在Python中正则表达式大概分为一下几个部分:  </p>
+<ol>
+<li>元字符</li>
+<li>模式</li>
+<li>函数</li>
+<li>re内置对象使用方法</li>
+<li>分组用法</li>
+<li>环视用法</li>
+</ol>
+<h3 id="一、-元字符"><a href="#一、-元字符" class="headerlink" title="一、 元字符"></a>一、 元字符</h3><h4 id="匹配字符"><a href="#匹配字符" class="headerlink" title="匹配字符"></a>匹配字符</h4><pre><code>.               匹配任意的字符，但是不包括换行符
+\d              匹配数字
+\s              匹配任意的空白字符相当于 [\t\n\r\f\v]
+\w              匹配字母数字下划线或者汉字
+\W              匹配任意非(字母，数字，下划线，汉字)的字符
+\S              匹配非任意空白字符相当于[^\t\n\r\f\v]
+\D              匹配任意非数字字符相当于[^0-9]
+</code></pre><h4 id="表示重复"><a href="#表示重复" class="headerlink" title="表示重复"></a>表示重复</h4><pre><code>*               重复0次或者更多次
++               重复一次或者多次
+?               重复0次或者一次
+{n}             重复n次
+{n,}            重复n次或者更多次
+{n,m}           重复n-m次
+</code></pre><h4 id="匹配位置"><a href="#匹配位置" class="headerlink" title="匹配位置"></a>匹配位置</h4><pre><code>\\b             匹配单词的开始或者结束
+^               匹配字符串的开始
+$               匹配字符串的结束
+\G              上一个匹配的结尾(本次匹配的开始)
+\A              字符串开头(类似^,但是不受处理多行选项的限制)
+\Z              字符串结尾或者行尾(不受处理多行选项的影响)
+\z              字符串结尾类似$，不受多行处理选项影响
+</code></pre><h4 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h4><pre><code>字符类
+\0XX          8进制值XX所表示的字符
+\xXX          16进制值XX所表示的字符
+\uXXXX        16进制值XXXX所表示的unicode字符
+\t            Tab
+\n            换行符
+\r            回车符
+\f            换页符
+\e            Escape
+\cN           ASCII码控制字符
+\p{name}      unicode中命名为name的字符类，例如\p{IsGreek}  
+
+陈列  
+[abcde]       匹配一个盘[]中的一个字符
+[.?!]         匹配给定的一个符号  
+
+范围  
+[]            字符集，一个字符的集合，可以匹配其中任意一个
+|             逻辑表达式或， a|b 可以匹配a也可以匹配b  
+[0-9]         匹配0-9的数字，等同于\d
+[a-z]         匹配a-z的所有小写字母
+[a-zA-Z]      匹配所有字母等同于
+[0-9a-zA-Z_]  等同于\W
+[^aeiou]      匹配除了aeiou几个字符外的其他所有字符  
+</code></pre><h4 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h4><pre><code>(...)         分组，默认为捕获，即被分组的内容可以被单独取出，默认的每个分组都有一个索引，从1开始
+(?:...)       分组不捕获模式，计算索引时会跳过这个分组
+(?P&lt;name&gt;...) 分组的命名模式，取出分组中的内容时可以使用索引也可以使用name
+(?P=name)     分组的引用模式，可以在同一个正则表达式中引用前面命名过得表达式
+(?#...)       注释，不会影响正则表达式的其他部分
+(?=...)       顺序肯定环视，表示所在位置右侧能匹配括号内正则(但是不包括右侧匹配到的内容)
+(?!...)       顺序否定环视，表示所在位置右侧内容应是不能匹配括号内正则
+(?&lt;=..)       逆序肯定环视，表示所在位置的左侧可以匹配括号内正则(但是布包括座侧匹配到的内容)
+(?&lt;!..)       逆序否定环视，表示所在位置的作侧内容应是不能匹配括号内正则
+\number       匹配和前面索引为number的分组捕获到的内容一样的字符串
+(?(id/name)yes|no)    若前面id/name指定的分组匹配成功，则执行yes处的匹配，否则执行no处的匹配
+</code></pre><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><pre><code>re.findall(pattern, string)       找到之后返回符合组的列表，组开头有?:则返回整个
+re.search(pattern, string)        search 扫描整个字符串并返回第一个成功的匹配match对象。
+re.match(pattern, string)         re.match 尝试从字符串的起始位置匹配一个模式，如果不是起始位置匹配成功的话，match()就返回none。
+re.finditer(pattern, string)      找到re匹配的所有的子串，并把它们作为一个迭代器返回
+re.split(pattern, string)         分割字符串
+re.sub(pattern, repl, string, count=0)     替换count个，0为所有
+re.subn(pattern, repl, string)            功能同上，返回一个元组(替换完的字符串，替换次数)
+</code></pre><h4 id="match对象的方法"><a href="#match对象的方法" class="headerlink" title="match对象的方法"></a>match对象的方法</h4><pre><code>group()             返回匹配到的字符串
+start()             返回匹配到的起始位置
+end()               返回匹配到的结束位置
+span()              返回一个元组(start，end)
+group(num/name)     返回指定组匹配到的内容     
+</code></pre>
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/index.html">Home</a></li>
+         
+          <li><a href="/about/index.html">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/wha000tif">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python正则表达式学习"><span class="toc-number">1.</span> <span class="toc-text">Python正则表达式学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-元字符"><span class="toc-number">1.0.1.</span> <span class="toc-text">一、 元字符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#匹配字符"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">匹配字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表示重复"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">表示重复</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#匹配位置"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">匹配位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符类"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">字符类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组"><span class="toc-number">1.0.1.5.</span> <span class="toc-text">分组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数"><span class="toc-number">1.0.1.6.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#match对象的方法"><span class="toc-number">1.0.1.7.</span> <span class="toc-text">match对象的方法</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/07/24/python正则表达式学习笔记/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&text=Python正则表达式学习笔记"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&title=Python正则表达式学习笔记"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&is_video=false&description=Python正则表达式学习笔记"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python正则表达式学习笔记&body=Check out this article: http://yoursite.com/2017/07/24/python正则表达式学习笔记/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&title=Python正则表达式学习笔记"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&title=Python正则表达式学习笔记"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&title=Python正则表达式学习笔记"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&title=Python正则表达式学习笔记"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/07/24/python正则表达式学习笔记/&name=Python正则表达式学习笔记&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 waht000if
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/index.html">Home</a></li>
+         
+          <li><a href="/about/index.html">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/wha000tif">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
