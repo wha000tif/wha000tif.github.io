@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="#Python中的多重继承和super()用法 新式类和经典类  python中的类分为两种，新式类和经典类。  新式类继承自object或者其他的新式类。经典类则没有。这些都是在python2中才有的。  在python3中，所有的类都是新式类，因为所有的类都派生自内置类型object(即使没有显示的继承object类型)，即所有的类都是“新式类”。 继承顺序的区别  主要是在有多重继承时会遇到">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python多重继承">
+<meta property="og:url" content="http://yoursite.com/2017/08/14/python多重继承/index.html">
+<meta property="og:site_name" content="waht000if">
+<meta property="og:description" content="#Python中的多重继承和super()用法 新式类和经典类  python中的类分为两种，新式类和经典类。  新式类继承自object或者其他的新式类。经典类则没有。这些都是在python2中才有的。  在python3中，所有的类都是新式类，因为所有的类都派生自内置类型object(即使没有显示的继承object类型)，即所有的类都是“新式类”。 继承顺序的区别  主要是在有多重继承时会遇到">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-14T11:28:38.959Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python多重继承">
+<meta name="twitter:description" content="#Python中的多重继承和super()用法 新式类和经典类  python中的类分为两种，新式类和经典类。  新式类继承自object或者其他的新式类。经典类则没有。这些都是在python2中才有的。  在python3中，所有的类都是新式类，因为所有的类都派生自内置类型object(即使没有显示的继承object类型)，即所有的类都是“新式类”。 继承顺序的区别  主要是在有多重继承时会遇到">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>python多重继承</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="waht000if" type="application/atom+xml" />
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/index.html">Home</a></li>
+         
+          <li><a href="/about/index.html">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/wha000tif">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2017/08/14/python多线程学习/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/14/python多重继承/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/14/python多重继承/&text=python多重继承"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/14/python多重继承/&title=python多重继承"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/14/python多重继承/&is_video=false&description=python多重继承"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=python多重继承&body=Check out this article: http://yoursite.com/2017/08/14/python多重继承/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/14/python多重继承/&title=python多重继承"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/14/python多重继承/&title=python多重继承"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/14/python多重继承/&title=python多重继承"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/14/python多重继承/&title=python多重继承"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/14/python多重继承/&name=python多重继承&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#新式类和经典类"><span class="toc-number">1.</span> <span class="toc-text">新式类和经典类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承顺序的区别"><span class="toc-number">2.</span> <span class="toc-text">继承顺序的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#super-的使用"><span class="toc-number">3.</span> <span class="toc-text">super()的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单继承"><span class="toc-number">3.1.</span> <span class="toc-text">单继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多继承"><span class="toc-number">3.2.</span> <span class="toc-text">多继承</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        python多重继承
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">waht000if</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-08-14T11:27:40.000Z" itemprop="datePublished">2017-08-14</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/python/">python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>#Python中的多重继承和super()用法</p>
+<h2 id="新式类和经典类"><a href="#新式类和经典类" class="headerlink" title="新式类和经典类"></a>新式类和经典类</h2><p>  python中的类分为两种，新式类和经典类。<br>  新式类继承自object或者其他的新式类。经典类则没有。这些都是在python2中才有的。<br>  在python3中，所有的类都是新式类，因为所有的类都派生自内置类型object(即使没有显示的继承object类型)，即所有的类都是“新式类”。</p>
+<h2 id="继承顺序的区别"><a href="#继承顺序的区别" class="headerlink" title="继承顺序的区别"></a>继承顺序的区别</h2><p>  主要是在有多重继承时会遇到这个问题。<br>  经典类中的多重继承，采用的是深度优先，即从下往上搜索。而在新式类中采用的是C3算法。<br>  对于经典类进行验证（需要在python2下面运行）。ClassicClassB 继承自 ClassicClassA，SubClassicClass继承自ClassicClassB，ClassicClassC<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class ClassicClassA():</div><div class="line">  var = &apos;Classic Class A&apos;</div><div class="line"></div><div class="line"></div><div class="line">class ClassicClassB(ClassicClassA):</div><div class="line">    pass</div><div class="line"></div><div class="line"></div><div class="line">class ClassicClassC():</div><div class="line">    var = &apos;Classic Class C&apos;</div><div class="line"></div><div class="line"></div><div class="line">class SubClassicClass(ClassicClassB, ClassicClassC):</div><div class="line">    pass</div><div class="line"></div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    print(SubClassicClass.var)</div></pre></td></tr></table></figure></p>
+<p>  最后的运行结果输出的是 Classic Class A。<br>  在SubClassicClass对var属性进行搜索的过程中，根据从下到上的原则，会优先搜索ClassicClassB，而ClassicClassB没有var属性，会继续往上搜索ClassicClassB的超类ClassicClassA，在ClassicClassA中发现var属性后停止搜索，var的值为ClassicClassA中var的值；而ClassicClassC的var属性从始至终都未被搜索到。</p>
+<p>  在python的新式类中，方法解析的顺序并不是广度优先算法，而是C3算法，在某些情况下C3算法的结果恰好符合广度优先的顺序。<br>  可以通过代码来验证下：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">class NewStyleClassA(object):</div><div class="line">  var = &apos;New Style Class A&apos;</div><div class="line"></div><div class="line"></div><div class="line">class NewStyleClassB(NewStyleClassA):</div><div class="line">    pass</div><div class="line"></div><div class="line"></div><div class="line">class NewStyleClassC(NewStyleClassA):</div><div class="line">    var = &apos;New Style Class C&apos;</div><div class="line"></div><div class="line"></div><div class="line">class SubNewStyleClass(NewStyleClassB, NewStyleClassC):</div><div class="line">    pass</div><div class="line"></div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    print(SubNewStyleClass.mro())</div><div class="line">    print(SubNewStyleClass.var)</div></pre></td></tr></table></figure></p>
+<p>  输出结果如下：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[&lt;class &apos;__main__.SubNewStyleClass&apos;&gt;, &lt;class &apos;__main__.NewStyleClassB&apos;&gt;, &lt;class &apos;__main__.NewStyleClassC&apos;&gt;, &lt;class &apos;__main__.NewStyleClassA&apos;&gt;, &lt;type &apos;object&apos;&gt;]</div><div class="line">New Style Class C</div></pre></td></tr></table></figure></p>
+<p>  将上述代码中的NewStyleClassC修改为继承自object。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">class NewStyleClassA(object):</div><div class="line">  var = &apos;New Style Class A&apos;</div><div class="line"></div><div class="line"></div><div class="line">class NewStyleClassB(NewStyleClassA):</div><div class="line">    pass</div><div class="line"></div><div class="line"></div><div class="line">class NewStyleClassC(object):</div><div class="line">    var = &apos;New Style Class C&apos;</div><div class="line"></div><div class="line"></div><div class="line">class SubNewStyleClass(NewStyleClassB, NewStyleClassC):</div><div class="line">    pass</div><div class="line"></div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    print(SubNewStyleClass.mro())</div><div class="line">    print(SubNewStyleClass.var)</div></pre></td></tr></table></figure></p>
+<p>  运行结果如下:<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[&lt;class &apos;__main__.SubNewStyleClass&apos;&gt;, &lt;class &apos;__main__.NewStyleClassB&apos;&gt;, &lt;class &apos;__main__.NewStyleClassA&apos;&gt;, &lt;class &apos;__main__.NewStyleClassC&apos;&gt;, &lt;type &apos;object&apos;&gt;]</div><div class="line">New Style Class A</div></pre></td></tr></table></figure></p>
+<p>  其结果并不是想象中的广度优先。</p>
+<p>  关于C3算法，python的官方文档中是这样解释的。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">take the head of the first list, i.e L[B1][0]; if this head is not in the tail of any of the other lists, then add it to the linearization of C and remove it from the lists in the merge, otherwise look at the head of the next list and take it, if it is a good head. Then repeat the operation until all the class are removed or it is impossible to find good heads. In this case, it is impossible to construct the merge, Python 2.3 will refuse to create the class C and will raise an exception.</div></pre></td></tr></table></figure></p>
+<p>  C3算法的本质是，Merge，不断把mro()函数返回的序列进行merge。规则如下：</p>
+<ol>
+<li><p>如果第一个序列的第一个元素，是后续序列的第一个元素，或者不再后续序列中再次出现，则将这个元素合并到最终的方法解析顺序序列中，并从当前操作的全部序列中删除。</p>
+</li>
+<li><p>如果不符合，则跳过此元素，查找下一个列表的第一个元素，重复1的判断规则</p>
+</li>
+</ol>
+<h2 id="super-的使用"><a href="#super-的使用" class="headerlink" title="super()的使用"></a>super()的使用</h2><p>  首先在python3中，可以直接使用super().XXX来调用父类中的某个函数，在python2中则需要使用super(Class,self).xxx来实现。</p>
+<h3 id="单继承"><a href="#单继承" class="headerlink" title="单继承"></a>单继承</h3><p>  在单继承中，super主要是用来调用父类的方法的。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class A:</div><div class="line">  def __init__(self):</div><div class="line">      self.n = 2</div><div class="line"></div><div class="line">  def add(self, m):</div><div class="line">      print(self.n)</div><div class="line">      print(&apos;self is &#123;0&#125; @A.add&apos;.format(self))</div><div class="line">      self.n += m</div><div class="line"></div><div class="line"></div><div class="line">class B(A):</div><div class="line">    def __init__(self):</div><div class="line">        self.n = 3</div><div class="line"></div><div class="line">    def add(self, m):</div><div class="line">        print(&apos;self is &#123;0&#125; @B.add&apos;.format(self))</div><div class="line">        super().add(m)</div><div class="line">        self.n += 3</div><div class="line"></div><div class="line">b = B()</div><div class="line">b.add(2)</div><div class="line">print(b.n)</div></pre></td></tr></table></figure></p>
+<p>  执行的结果如下<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">self is &lt;__main__.B object at 0x000002AA5068C908&gt; @B.add</div><div class="line">3</div><div class="line">self is &lt;__main__.B object at 0x000002AA5068C908&gt; @A.add</div><div class="line">8</div></pre></td></tr></table></figure></p>
+<p>  这个结果说明：</p>
+<ol>
+<li>super().add(m)的确是调用了父类中的add方法</li>
+<li>super().add(m)调用父类的方法def add(self, m)时，此时父类中的self并不是父类的实例，<br>而是子类的实例，所以print(self.n)输出的是3，而不是2.</li>
+</ol>
+<h3 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h3><p>  在上面代码的基础之上再定义一个class C和class D<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">class A:</div><div class="line">  def __init__(self):</div><div class="line">      self.n = 2</div><div class="line"></div><div class="line">  def add(self, m):</div><div class="line">      print(self.n)</div><div class="line">      print(&apos;self is &#123;0&#125; @A.add&apos;.format(self))</div><div class="line">      self.n += m</div><div class="line"></div><div class="line"></div><div class="line">class B(A):</div><div class="line">    def __init__(self):</div><div class="line">        self.n = 3</div><div class="line"></div><div class="line">    def add(self, m):</div><div class="line">        print(&apos;self is &#123;0&#125; @B.add&apos;.format(self))</div><div class="line">        super().add(m)</div><div class="line">        self.n += 3</div><div class="line"></div><div class="line">class C(A):</div><div class="line">  def __init__(self):</div><div class="line">      self.n = 4</div><div class="line"></div><div class="line">  def add(self, m):</div><div class="line">      print(&apos;self is &#123;0&#125; @C.add&apos;.format(self))</div><div class="line">      super().add(m)</div><div class="line">      self.n += 4</div><div class="line"></div><div class="line"></div><div class="line">class D(B, C):</div><div class="line">    def __init__(self):</div><div class="line">        self.n = 5</div><div class="line"></div><div class="line">    def add(self, m):</div><div class="line">        print(&apos;self is &#123;0&#125; @D.add&apos;.format(self))</div><div class="line">        super().add(m)</div><div class="line">        self.n += 5</div></pre></td></tr></table></figure></p>
+<p>  执行代码<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">d = D()</div><div class="line">d.add(2)</div><div class="line">print(d.n)</div></pre></td></tr></table></figure></p>
+<p>  得到如下的输出结果：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[&lt;class &apos;__main__.D&apos;&gt;, &lt;class &apos;__main__.B&apos;&gt;, &lt;class &apos;__main__.C&apos;&gt;, &lt;class &apos;__main__.A&apos;&gt;, &lt;class &apos;object&apos;&gt;]</div><div class="line">self is &lt;__main__.D object at 0x00000196FF20B908&gt; @D.add</div><div class="line">self is &lt;__main__.D object at 0x00000196FF20B908&gt; @B.add</div><div class="line">self is &lt;__main__.D object at 0x00000196FF20B908&gt; @C.add</div><div class="line">5</div><div class="line">self is &lt;__main__.D object at 0x00000196FF20B908&gt; @A.add</div><div class="line">19</div></pre></td></tr></table></figure></p>
+<p>  显然，结果并不是预料中的<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">self is &lt;__main__.D object at 0x00000196FF20B908&gt; @D.add</div><div class="line">self is &lt;__main__.D object at 0x00000196FF20B908&gt; @B.add</div><div class="line">5</div><div class="line">self is &lt;__main__.D object at 0x00000196FF20B908&gt; @A.add</div><div class="line">15</div></pre></td></tr></table></figure></p>
+<p>  当我们调用 super() 的时候，实际上是实例化了一个 super 类。没错，super是个类。<br>  为了弄清它的原理，我们需要花点时间解释下Python是如何实现继承的。 对于你定义的每一个类，Python会计算出一个所谓的方法解析顺序(MRO)列表。 这个MRO列表就是一个简单的所有基类的线性顺序表。例如：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; C.__mro__</div><div class="line">(&lt;class &apos;__main__.C&apos;&gt;, &lt;class &apos;__main__.A&apos;&gt;, &lt;class &apos;__main__.B&apos;&gt;,</div><div class="line">&lt;class &apos;__main__.Base&apos;&gt;, &lt;class &apos;object&apos;&gt;)</div><div class="line">&gt;&gt;</div></pre></td></tr></table></figure></p>
+<p>  为了实现继承，Python会在MRO列表上从左到右开始查找基类，直到找到第一个匹配这个属性的类为止。<br>  而这个MRO列表的构造是通过一个C3线性化算法来实现的。 我们不去深究这个算法的数学原理，它实际上就是合并所有父类的MRO列表并遵循如下三条准则：</p>
+<ol>
+<li>子类会先于父类被检查</li>
+<li>多个父类会根据它们在列表中的顺序被检查</li>
+<li><p>如果对下一个类存在两个合法的选择，选择第一个父类</p>
+<p>当你使用 super() 函数时，Python会在MRO列表上继续搜索下一个类。 只要每个重定义的方法统一使用 super() 并只调用它一次， 那么控制流最终会遍历完整个MRO列表，每个方法也只会被调用一次。这样就可以解释为什么为19，并且调用C了。</p>
+<p>super() 有个令人吃惊的地方是它并不一定去查找某个类在MRO中下一个直接父类， 你甚至可以在一个没有直接父类的类中使用它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">class A:</div><div class="line">  def spam(self):</div><div class="line">      print(&apos;A.spam&apos;)</div><div class="line">      super().spam()</div><div class="line"></div><div class="line">&gt;&gt;&gt; a = A()</div><div class="line">&gt;&gt;&gt; a.spam()</div><div class="line">A.spam</div><div class="line">Traceback (most recent call last):</div><div class="line">    File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</div><div class="line">    File &quot;&lt;stdin&gt;&quot;, line 4, in spam</div><div class="line">AttributeError: &apos;super&apos; object has no attribute &apos;spam&apos;</div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">&gt;&gt;&gt; class B:</div><div class="line">...     def spam(self):</div><div class="line">...         print(&apos;B.spam&apos;)</div><div class="line">...</div><div class="line">&gt;&gt;&gt; class C(A,B):</div><div class="line">...     pass</div><div class="line">...</div><div class="line">&gt;&gt;&gt; c = C()</div><div class="line">&gt;&gt;&gt; c.spam()</div><div class="line">A.spam</div><div class="line">B.spam</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<p>你可以看到在类A中使用 super().spam() 实际上调用的是跟类A毫无关系的类B中的 spam() 方法。 这个用类C的MRO列表就可以完全解释清楚了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; C.__mro__</div><div class="line">(&lt;class &apos;__main__.C&apos;&gt;, &lt;class &apos;__main__.A&apos;&gt;, &lt;class &apos;__main__.B&apos;&gt;,</div><div class="line">&lt;class &apos;object&apos;&gt;)</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/index.html">Home</a></li>
+         
+          <li><a href="/about/index.html">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/wha000tif">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#新式类和经典类"><span class="toc-number">1.</span> <span class="toc-text">新式类和经典类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承顺序的区别"><span class="toc-number">2.</span> <span class="toc-text">继承顺序的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#super-的使用"><span class="toc-number">3.</span> <span class="toc-text">super()的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单继承"><span class="toc-number">3.1.</span> <span class="toc-text">单继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多继承"><span class="toc-number">3.2.</span> <span class="toc-text">多继承</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/14/python多重继承/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/14/python多重继承/&text=python多重继承"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/14/python多重继承/&title=python多重继承"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/14/python多重继承/&is_video=false&description=python多重继承"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=python多重继承&body=Check out this article: http://yoursite.com/2017/08/14/python多重继承/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/14/python多重继承/&title=python多重继承"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/14/python多重继承/&title=python多重继承"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/14/python多重继承/&title=python多重继承"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/14/python多重继承/&title=python多重继承"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/14/python多重继承/&name=python多重继承&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 waht000if
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/index.html">Home</a></li>
+         
+          <li><a href="/about/index.html">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/wha000tif">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

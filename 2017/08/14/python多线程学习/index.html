@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="多线/进程学习  对于操作系统来说，一个任务就是一个进程(Process，比如说打开一个浏览器，一个记事本，一个word程序。  有些进程在还不止同时干一件事情，比如说word程序在运行的时候，可以同时打字，做拼写检查等。在程序的内部，  需要同时做多件事情，就需要同时运行多个子任务，这些子任务就是线程。  由于每个进程至少要干一件事，所以，一个进程至少有一个线程。当然，像Word这种复杂的进程可">
+<meta name="keywords" content="python，多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python多线程学习">
+<meta property="og:url" content="http://yoursite.com/2017/08/14/python多线程学习/index.html">
+<meta property="og:site_name" content="waht000if">
+<meta property="og:description" content="多线/进程学习  对于操作系统来说，一个任务就是一个进程(Process，比如说打开一个浏览器，一个记事本，一个word程序。  有些进程在还不止同时干一件事情，比如说word程序在运行的时候，可以同时打字，做拼写检查等。在程序的内部，  需要同时做多件事情，就需要同时运行多个子任务，这些子任务就是线程。  由于每个进程至少要干一件事，所以，一个进程至少有一个线程。当然，像Word这种复杂的进程可">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-14T11:28:01.570Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python多线程学习">
+<meta name="twitter:description" content="多线/进程学习  对于操作系统来说，一个任务就是一个进程(Process，比如说打开一个浏览器，一个记事本，一个word程序。  有些进程在还不止同时干一件事情，比如说word程序在运行的时候，可以同时打字，做拼写检查等。在程序的内部，  需要同时做多件事情，就需要同时运行多个子任务，这些子任务就是线程。  由于每个进程至少要干一件事，所以，一个进程至少有一个线程。当然，像Word这种复杂的进程可">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>python多线程学习</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="waht000if" type="application/atom+xml" />
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/index.html">Home</a></li>
+         
+          <li><a href="/about/index.html">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/wha000tif">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/08/14/python多重继承/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/07/24/python正则表达式学习笔记/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/14/python多线程学习/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/14/python多线程学习/&text=python多线程学习"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/14/python多线程学习/&title=python多线程学习"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/14/python多线程学习/&is_video=false&description=python多线程学习"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=python多线程学习&body=Check out this article: http://yoursite.com/2017/08/14/python多线程学习/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/14/python多线程学习/&title=python多线程学习"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/14/python多线程学习/&title=python多线程学习"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/14/python多线程学习/&title=python多线程学习"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/14/python多线程学习/&title=python多线程学习"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/14/python多线程学习/&name=python多线程学习&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#多线-进程学习"><span class="toc-number">1.</span> <span class="toc-text">多线/进程学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程"><span class="toc-number">1.1.</span> <span class="toc-text">进程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#POOL介绍"><span class="toc-number">1.1.1.</span> <span class="toc-text">POOL介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子进程"><span class="toc-number">1.1.2.</span> <span class="toc-text">子进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程间的通信"><span class="toc-number">1.1.3.</span> <span class="toc-text">进程间的通信</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程"><span class="toc-number">1.2.</span> <span class="toc-text">多线程</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        python多线程学习
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">waht000if</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-08-14T11:26:38.000Z" itemprop="datePublished">2017-08-14</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/python，多线程/">python，多线程</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="多线-进程学习"><a href="#多线-进程学习" class="headerlink" title="多线/进程学习"></a>多线/进程学习</h1><p>  对于操作系统来说，一个任务就是一个进程(Process，比如说打开一个浏览器，一个记事本，一个word程序。<br>  有些进程在还不止同时干一件事情，比如说word程序在运行的时候，可以同时打字，做拼写检查等。在程序的内部，<br>  需要同时做多件事情，就需要同时运行多个子任务，这些子任务就是线程。<br>  由于每个进程至少要干一件事，所以，一个进程至少有一个线程。当然，像Word这种复杂的进程可以有多个线程，多个线程可以同时执行，多线程的执行方式和多进程是一样的，也是由操作系统在多个线程之间快速切换，让每个线程都短暂地交替运行，看起来就像同时执行一样。当然，真正地同时执行多线程需要多核CPU才可能实现。  </p>
+<p>  要同时执行多个任务可以有两种解决方案。</p>
+<ol>
+<li>启动多个进程，每个进程只有一个线程，但是多个线程一起执行多个任务。</li>
+<li><p>启动一个进程，这个进程中有多个线程，多个线程一起执行多个任务。<br>第三种就是多个进程多个线程来执行任务，这种模型更复杂。</p>
+<p>线程是最小的执行单元，在操作系统中进程是程序分配资源的最小单位，而线程是调度的最小单位。<br>一个进程中最少有一个线程。进程线程的调度完全由操作系统决定。</p>
+</li>
+</ol>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>  在Unix/Linux操作系统中，可以使用fork()系统调用来实现子进程的创建，fork（）函数通过系统调用创建一个与原来进程几乎完全相同的进程，也就是两个进程可以做完全相同的事，但如果初始参数或者传入的变量不同，两个进程也可以做不同的事。一个进程调用fork（）函数后，系统先给新的进程分配资源，例如存储数据和代码的空间。然后把原来的进程的所有值都复制到新的新进程中，只有少数值与原来的进程的值不同。相当于克隆了一个自己。看个例子。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">#include &lt;unistd.h&gt;  </div><div class="line">#include &lt;stdio.h&gt;   </div><div class="line">int main ()   </div><div class="line">&#123;   </div><div class="line">    pid_t fpid; //fpid表示fork函数返回的值  </div><div class="line">    int count=0;  </div><div class="line">    fpid=fork();   </div><div class="line">    if (fpid &lt; 0)   </div><div class="line">        printf(&quot;error in fork!&quot;);   </div><div class="line">    else if (fpid == 0) &#123;  </div><div class="line">        printf(&quot;i am the child process, my process id is %d/n&quot;,getpid());   </div><div class="line">        printf(&quot;我是爹的儿子/n&quot;);//对某些人来说中文看着更直白。  </div><div class="line">        count++;  </div><div class="line">    &#125;  </div><div class="line">    else &#123;  </div><div class="line">        printf(&quot;i am the parent process, my process id is %d/n&quot;,getpid());   </div><div class="line">        printf(&quot;我是孩子他爹/n&quot;);  </div><div class="line">        count++;  </div><div class="line">    &#125;  </div><div class="line">    printf(&quot;统计结果是: %d/n&quot;,count);  </div><div class="line">    return 0;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  执行上面的代码后输出结果是：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">i am the child process, my process id is 5574</div><div class="line">  我是爹的儿子</div><div class="line">  统计结果是: 1</div><div class="line">  i am the parent process, my process id is 5573</div><div class="line">  我是孩子他爹</div><div class="line">  统计结果是: 1</div></pre></td></tr></table></figure></p>
+<p>  在语句fpid=fork()之前，只有一个进程在执行这段代码，但在这条语句之后，就变成两个进程在执行了，这两个进程的几乎完全相同，将要执行的下一条语句都是if(fpid&lt;0)…….<br>  两个进程获取到的fid不同，这是因为fork()函数的特性。fork调用的一个奇妙之处就是它仅仅被调用一次，却能够返回两次，它可能有三种不同的返回值：</p>
+<pre><code>1. 在父进程中，返回的是创建的子进程的pid
+2. 在子进程中，赶回的是0
+3. 如果fork出错了，那么返回一个负值。
+</code></pre><p>  创建新进程成功后，系统中出现两个基本完全相同的进程，这两个进程执行没有固定的先后顺序，哪个进程先执行要看系统的进程调度策略。<br>  还有人可能疑惑为什么不是从#include处开始复制代码的，这是因为fork是把进程当前的情况拷贝一份，执行fork时，进程已经执行完了int count=0;fork只拷贝下一个要执行的代码到新的进程。</p>
+<p>  在基于Linux平台的python中，可以直接使用os》fork()来创建一个子进程。但是在windows下是没有fork这个系统调用的，那么怎么办呢？这个时候就可以选择使用multiprocessing模块了。它是一个跨平台的多进程模块。  </p>
+<p>  multiprocessing提供了一个Process类来代表进程对象。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">from multiprocessing import Process</div><div class="line">import os</div><div class="line"></div><div class="line"># 子进程要执行的代码</div><div class="line">def run_proc(name):</div><div class="line">    print(&apos;Run child process %s (%s)...&apos; % (name, os.getpid()))</div><div class="line"></div><div class="line">if __name__==&apos;__main__&apos;:</div><div class="line">    print(&apos;Parent process %s.&apos; % os.getpid())</div><div class="line">    p = Process(target=run_proc, args=(&apos;test&apos;,))</div><div class="line">    print(&apos;Child process will start.&apos;)</div><div class="line">    p.start()</div><div class="line">    p.join()</div><div class="line">    print(&apos;Child process end.&apos;)</div></pre></td></tr></table></figure></p>
+<p>  执行结果如下：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Parent process 928.</div><div class="line">Process will start.</div><div class="line">Run child process test (929)...</div><div class="line">Process end.</div></pre></td></tr></table></figure></p>
+<p>  创建子进程需要传入一个函数和函数需要的参数，创建一个Process实例，使用start()方法启动进程，这样比fork还方便。join()方法可以等待子进程结束后再继续往下运行，通常用于进程间的同步。<br>  当需要大量的进程时，可以使用进程池的方式批量的创建子进程。</p>
+<h3 id="POOL介绍"><a href="#POOL介绍" class="headerlink" title="POOL介绍"></a>POOL介绍</h3><p>  Pool类用于需要执行的目标很多，而手动限制进程数量又太繁琐时，如果目标少且不用控制进程数量则可以用Process类。</p>
+<p>  构造方法<br>    Pool([processes[, initializer[, initargs[, maxtasksperchild[, context]]]]])<br>    processes ：使用的工作进程的数量，如果processes是None那么使用 os.cpu_count()返回的数量。<br>    initializer： 如果initializer是None，那么每一个工作进程在开始的时候会调用initializer(*initargs)。<br>    maxtasksperchild：工作进程退出之前可以完成的任务数，完成后用一个新的工作进程来替代原进程，来让闲置的资源被释放。maxtasksperchild默认是None，意味着只要Pool存在工作进程就会一直存活。<br>    context: 用在制定工作进程启动时的上下文，一般使用 multiprocessing.Pool() 或者一个context对象的Pool()方法来创建一个池，两种方法都适当的设置了context。</p>
+<p>  实例方法<br>    apply_async(func[, args[, kwds[, callback]]]) 它是非阻塞。<br>    apply(func[, args[, kwds]])是阻塞的。<br>    close() 关闭pool，使其不在接受新的任务。<br>    terminate() 关闭pool，结束工作进程，不在处理未完成的任务。<br>    join() 主进程阻塞，等待子进程的退出， join方法要在close或terminate之后使用。</p>
+<h3 id="子进程"><a href="#子进程" class="headerlink" title="子进程"></a>子进程</h3><p>  很多时候，子进程不是进程自身，而是一个外部进程，创建了子进程之后，需要控制进程的输入和输出。<br>  subprocess可以很方便的启动一个子进程，然后控制它的输入和输出。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">import subprocess</div><div class="line"></div><div class="line">print(&apos;$ nslookup www.python.org&apos;)</div><div class="line">r = subprocess.call([&apos;nslookup&apos;, &apos;www.python.org&apos;])</div><div class="line">print(&apos;Exit code:&apos;, r)</div></pre></td></tr></table></figure></p>
+<p>  如果子进程还需要输入，则可以通过communicate()方法输入。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">import subprocess</div><div class="line"></div><div class="line">print(&apos;$ nslookup&apos;)</div><div class="line">p = subprocess.Popen([&apos;nslookup&apos;], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)</div><div class="line">output, err = p.communicate(b&apos;set q=mx\npython.org\nexit\n&apos;)</div><div class="line">print(output.decode(&apos;utf-8&apos;))</div><div class="line">print(&apos;Exit code:&apos;, p.returncode)</div></pre></td></tr></table></figure></p>
+<p>  上面的代码相当于执行nslookup，然后手动输入命令：<br>    set q=mx<br>    python.org<br>    exit</p>
+<h3 id="进程间的通信"><a href="#进程间的通信" class="headerlink" title="进程间的通信"></a>进程间的通信</h3><p>  Process之间肯定是需要通信的，操作系统提供了很多机制来实现进程间的通信。Python的multiprocessing模块包装了底层的机制，提供了Queue、Pipes等多种方式来交换数据。<br>  我们以Queue为例，在父进程中创建两个子进程，一个往Queue里写数据，一个从Queue里读数据：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">from multiprocessing import Process, Queue</div><div class="line">import os, time, random</div><div class="line"></div><div class="line">def write(q):</div><div class="line">    print(&apos;process to write %s&apos;% (os.getpid))</div><div class="line">    for value in [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;]:</div><div class="line">        print(&apos;put %s to queue&apos; % value)</div><div class="line">        q.put(value)</div><div class="line">        time.sleep(random.random())</div><div class="line">def read(q):</div><div class="line">    print(&apos;Process to read: %s&apos; % os.getpid())</div><div class="line">    while True:</div><div class="line">        value = q.get(True)</div><div class="line">        print(&apos;Get %s from queue.&apos; % value)</div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    q = Queue()</div><div class="line">    pw = Process(write, args=(q, ))</div><div class="line">    pr = Process(read, args=(q, ))</div><div class="line">    pw.start()</div><div class="line">    pr.start()</div><div class="line">    pw.join()</div><div class="line">    pr.terminate()</div><div class="line">    # pr进程进入死循环，无法自行结束，直接强行终止</div></pre></td></tr></table></figure></p>
+<p>  上面代码在win10下执行，有问题，貌似只有pw进程启动了。暂时还没搞明白什么情况。</p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>  多个任务可以是多个进程完成也可以是一个进程内的多个线程完成。<br>  进程是由多个或者一个线程组成的，也就是说一个进程中至少会有一个线程。由于线程是操作系统直接支持的执行单元，因此，高级语言通常都内置多线程的支持，Python也不例外，并且，Python的线程是真正的Posix Thread，而不是模拟出来的线程。<br>  Python的标准库提供了两个模块：_thread(在python2中是thread)和threading，_thread是低级模块，threading是高级模块，对_thread进行了封装。绝大多数情况下，我们只需要使用threading这个高级模块。<br>  启动一个线程就是把一个函数传入并创建Thread实例，然后调用start()开始执行：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">import time, threading</div><div class="line"></div><div class="line">def loop():</div><div class="line">    print(&apos;thread %s is running&apos; %(threading.current_thread().name))</div><div class="line">    n = 0</div><div class="line">    while n&lt;5:</div><div class="line">        n = n + 1</div><div class="line">        print(&apos;thread %s &gt;&gt;&gt; %d&apos; % (threading.current_thread().name, n))</div><div class="line">        time.sleep(1)</div><div class="line">    print(&apos;thread %s endded&apos; % (threading.current_thread().name))</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">print(&apos;thread %s is running&apos; %(threading.current_thread().name))</div><div class="line">t = threading.Thread(target=loop, args=(), name=&apos;loop_thread&apos;)</div><div class="line">t.start()</div><div class="line">t.join()</div><div class="line">print(&apos;thread %s endded&apos; %(threading.current_thread().name))</div></pre></td></tr></table></figure></p>
+<p>  由于任何进程默认就会启动一个线程，我们把该线程称为主线程，主线程又可以启动新的线程，Python的threading模块有个current_thread()函数，它永远返回当前线程的实例。主线程实例的名字叫MainThread，子线程的名字在创建时指定，我们用LoopThread命名子线程。名字仅仅在打印时用来显示，完全没有其他意义，如果不起名字Python就自动给线程命名为Thread-1，Thread-2……</p>
+<p>  LOCK<br>  在多进程中，同一个变量，因为在每个进程中都会有一份拷贝，所以不同进程中的变量相互不影响。但是在多线程中，所有的变量都是进程共享的，任何一个变量可以被任何一个线程修改的。<br>  我们可以使用threading.LOCK()来实现一个线程锁，当多个线程同时执行lock.acquire()时，只有一个线程能成功地获取锁，然后继续执行代码，其他线程就继续等待直到获得锁为止。在线程执行完工作后一定要释放获取到的锁，不然后面的线程就无法继续工作了。<br>  锁的好处就是确保了某段关键代码只能由一个线程从头到尾完整地执行，坏处当然也很多，首先是阻止了多线程并发执行，包含锁的某段代码实际上只能以单线程模式执行，效率就大大地下降了。其次，由于可以存在多个锁，不同的线程持有不同的锁，并试图获取对方持有的锁时，可能会造成死锁，导致多个线程全部挂起，既不能执行，也无法结束，只能靠操作系统强制终止。</p>
+<p>  因为Python的线程虽然是真正的线程，但解释器执行代码时，有一个GIL锁：Global Interpreter Lock，任何Python线程执行前，必须先获得GIL锁，然后，每执行100条字节码，解释器就自动释放GIL锁，让别的线程有机会执行。这个GIL全局锁实际上把所有线程的执行代码都给上了锁，所以，多线程在Python中只能交替执行，即使100个线程跑在100核CPU上，也只能用到1个核。</p>
+<p>  所以想要实现多核任务，就只能通过多进程来实现。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/index.html">Home</a></li>
+         
+          <li><a href="/about/index.html">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/wha000tif">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#多线-进程学习"><span class="toc-number">1.</span> <span class="toc-text">多线/进程学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程"><span class="toc-number">1.1.</span> <span class="toc-text">进程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#POOL介绍"><span class="toc-number">1.1.1.</span> <span class="toc-text">POOL介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子进程"><span class="toc-number">1.1.2.</span> <span class="toc-text">子进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程间的通信"><span class="toc-number">1.1.3.</span> <span class="toc-text">进程间的通信</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程"><span class="toc-number">1.2.</span> <span class="toc-text">多线程</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/14/python多线程学习/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/14/python多线程学习/&text=python多线程学习"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/14/python多线程学习/&title=python多线程学习"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/14/python多线程学习/&is_video=false&description=python多线程学习"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=python多线程学习&body=Check out this article: http://yoursite.com/2017/08/14/python多线程学习/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/14/python多线程学习/&title=python多线程学习"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/14/python多线程学习/&title=python多线程学习"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/14/python多线程学习/&title=python多线程学习"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/14/python多线程学习/&title=python多线程学习"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/14/python多线程学习/&name=python多线程学习&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 waht000if
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/index.html">Home</a></li>
+         
+          <li><a href="/about/index.html">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/wha000tif">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
